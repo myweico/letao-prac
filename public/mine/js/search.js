@@ -1,6 +1,9 @@
 $(function () {
   /* 全局变量 */
-  var options = {}
+  var options = {
+    page: 0,
+    proName: ''
+  }
   // 为了判断是否还有数据，page固定
   var pageSize = 4
 
@@ -88,20 +91,26 @@ $(function () {
 
   // 绑定排序事件
   $('.orderbar>span').on('tap', function () {
-    $this = $(this)
-    $icon = $this.children('span')
+    let $this = $(this)
+    let $icon = $this.children('span')
+    let order = $this.data('order')
     if (!$this.hasClass('selected')) {
-      $(this).addClass('selected').siblings().removeClass('selected')
-      return
-    }
+      $this.addClass('selected').siblings().removeClass('selected')
+      $('.orderbar span[class~=mui-icon]').removeClass('mui-icon-arrowup').addClass('mui-icon-arrowdown')
 
-    if ($icon.hasClass('mui-icon-arrowdown')) {
+      options.price = 2
+      options.num = 2
+    } else if ($icon.hasClass('mui-icon-arrowdown')) {
       $icon.removeClass('mui-icon-arrowdown').addClass('mui-icon-arrowup')
-      return
+      options[order] = 1
+    } else {
+      $icon.removeClass('mui-icon-arrowup').addClass('mui-icon-arrowdown')
+      options[order] = 2
     }
-
-    $icon.removeClass('mui-icon-arrowup').addClass('mui-icon-arrowdown')
-
+    // 重新获取列表
+    options.page = 1
+    mui('#refreshContainer').pullRefresh().refresh(true)
+    getSearch(options, renderList)
   })
 
   function getSearch(optoins, callback) {
