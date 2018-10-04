@@ -1,0 +1,208 @@
+ul, li, a, img {
+  padding: 0;
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+.clearfix::after,
+.clearfix::before {
+  content: "";
+  display: block;
+  font-size: 0;
+  height: 0;
+  width: 0;
+  opacity: 0;
+  clear: both;
+}
+
+body {
+  background: #fff;
+}
+
+.mui-bar.mui-bar-nav {
+  background: #006699;
+  height: 45px;
+}
+.mui-bar.mui-bar-nav .mui-title {
+  color: #fff;
+}
+.mui-bar.mui-bar-nav .mui-icon {
+  color: #fff;
+}
+
+.container {
+  padding: 45px 0 50px;
+}
+.container .categary-nav {
+  width: 100%;
+  margin-top: 10px;
+  padding: 0 10px;
+}
+.container .categary-nav ul::before, .container .categary-nav ul::after {
+  content: "";
+  display: block;
+  font-size: 0;
+  height: 0;
+  width: 0;
+  opacity: 0;
+  clear: both;
+}
+.container .categary-nav ul li {
+  width: 33.33%;
+  float: left;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.container .categary-nav ul li a {
+  width: 100%;
+}
+.container .categary-nav ul li a img {
+  width: 100%;
+  display: block;
+}
+.container .activity {
+  margin-top: 10px;
+  padding: 0 10px;
+}
+.container .activity::before, .container .activity::after {
+  content: "";
+  display: block;
+  font-size: 0;
+  height: 0;
+  width: 0;
+  opacity: 0;
+  clear: both;
+}
+.container .activity .activity-left {
+  display: block;
+  width: 67.1%;
+  float: left;
+}
+.container .activity .activity-left img {
+  width: 50%;
+  float: left;
+}
+.container .activity .activity-right {
+  float: right;
+  width: 32.9%;
+}
+.container .activity .activity-right img {
+  width: 100%;
+}
+.container .area {
+  margin-top: 10px;
+  padding: 0 10px;
+}
+.container .area .title-img {
+  width: 100%;
+  display: block;
+}
+.container .area .brand-list::before, .container .area .brand-list::after {
+  content: "";
+  display: block;
+  font-size: 0;
+  height: 0;
+  width: 0;
+  opacity: 0;
+  clear: both;
+}
+.container .area .brand-list li {
+  float: left;
+  width: 25%;
+}
+.container .area .brand-list li a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.container .area .brand-list li a img {
+  width: 100%;
+  display: block;
+}
+.container .area .product-list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.container .area .product-list li {
+  width: 49%;
+  box-shadow: 0 0 5px rgba(34, 33, 33, 0.2);
+  padding: 10px 0;
+  margin: 5px 0;
+}
+.container .area .product-list li a {
+  display: block;
+  width: 100%;
+}
+.container .area .product-list li a img {
+  width: 100%;
+  display: block;
+}
+.container .area .product-list li .info {
+  padding: 0 5px;
+  text-align: center;
+}
+.container .area .product-list li .info .name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.container .area .product-list li .info .price-now {
+  color: #f00;
+}
+.container .area .product-list li .info .price-old {
+  font-size: 12px;
+  color: #ccc;
+}
+.container .area .product-list li .info .button {
+  background: #006699;
+  color: #fff;
+}
+
+.footer-bar {
+  height: 50px;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  background: #006699;
+  z-index: 999;
+}
+.footer-bar ul {
+  list-style: none;
+}
+.footer-bar ul::before {
+  content: "";
+  display: block;
+}
+.footer-bar ul li {
+  float: left;
+  width: 25%;
+}
+.footer-bar ul li a {
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  color: #fff;
+  text-align: center;
+  padding-top: 5px;
+}
+.footer-bar ul li a.active {
+  color: #ff8c00;
+}
+.footer-bar ul li a:before {
+  font-size: 20px;
+}
+.footer-bar ul li a span {
+  padding-top: 5px;
+  font-size: 12px;
+  display: block;
+}
+
+/*# sourceMappingURL=index.css.map */
