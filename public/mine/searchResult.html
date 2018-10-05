@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ch-ZH">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="blue">
+  <link type="image/x-icon" rel="shortcut icon" href="images/favicon.ico">
+  <link rel="stylesheet" href="lib/mui/css/mui.min.css">
+  <link rel="stylesheet" href="lib/mui/css/icons-extra.css">
+  <link rel="stylesheet" href="styles/searchResult.css">
+  <title>乐淘购物中心</title>
+</head>
+
+<body>
+  <header id="header" class="mui-bar mui-bar-nav">
+    <a class="mui-icon mui-icon-back" href="javascript:history.back();"></a>
+    <h1 class="mui-title">搜索中心</h1>
+  </header>
+
+  <div id="refreshContainer" class="mui-content mui-scroll-wrapper container">
+    <div class="mui-scroll">
+      <!-- 搜索栏 -->
+      <div class="search-input">
+        <input type="search" name="search-name" placeholder="搜索你喜欢的商品">
+        <button>搜索</button>
+      </div>
+
+      <!-- 条件选择栏 -->
+      <div class="orderbar">
+        <span data-order="time">上架时间<span class="mui-icon mui-icon-arrowdown"></span></span>
+        <span data-order="price">价格<span class="mui-icon mui-icon-arrowdown"></span></span>
+        <span data-order="num">销量<span class="mui-icon mui-icon-arrowdown"></span></span>
+        <span data-order="discount">折扣<span class="mui-icon mui-icon-arrowdown"></span></span>
+      </div>
+
+      <div class="search-list">
+        <ul class="product-list"></ul>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer-bar">
+    <ul>
+      <li><a href="" class="mui-icon mui-icon-home"><span>首页</span></a></li>
+      <li><a href="" class="mui-icon mui-icon-bars"><span>分类</span></a></li>
+      <li><a href="" class="mui-icon-extra mui-icon-extra-cart"><span>购物车</span></a></li>
+      <li><a href="" class="mui-icon mui-icon-person"><span>会员中心</span></a></li>
+    </ul>
+  </footer>
+
+  <!-- 模板文件 -->
+  <!-- 搜索列表模板 -->
+  <script type="text/template" id="search-result">
+    <% if (data.length !== 0) { %>
+      <% for (let i = 0; i < data.length; i++) {%>
+        <%
+          // 对数据进行预处理
+          let thisPro = data[i]
+          let showPic = ''
+  
+          if (thisPro.pic.length === 0) {
+            // 当没有图片数据的时候设置默认图片
+            let defaultPic = {
+              "id": i,
+              "picName": "defaultPic",
+              "productId": i,
+              "picAddr": "/mobile/images/none.jpg"
+            }
+            showPic = defaultPic.picAddr
+          } else {
+            // 有图片则使用第一张图片
+            showPic = thisPro.pic[0].picAddr
+          }
+        %>
+          <li>
+            <a href=""><img src="<%= showPic %>" alt=""></a>
+            <div class="info">
+              <p class="name"><%= thisPro.proName %></p>
+              <p class="price">
+                <span class="price-now">¥<%= thisPro.price %></span>
+                <del class="price-old">¥<%= thisPro.oldPrice %></del>
+              </p>
+              <button class="button">立即购买</button>
+            </div>
+          </li>
+        <% } %>
+    <% } else { %>
+      <span>没有找到您想要的商品~</span>
+    <% } %>
+    </script>
+  <!-- 引入脚本文件 -->
+  <script src="lib/zepto/zepto.min.js"></script>
+  <script src="lib/mui/js/mui.min.js"></script>
+  <script src="lib/art-template/template-web.js"></script>Z
+  <script src="js/searchResult.js"></script>
+</body>
+
+</html>

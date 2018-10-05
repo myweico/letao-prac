@@ -11,10 +11,10 @@
   }
 }
 
-@mixin ellipsis {
+@mixin ellipsis($n) {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: $n;
   -webkit-box-orient: vertical;
 }

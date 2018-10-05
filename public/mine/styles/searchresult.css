@@ -71,48 +71,70 @@ body {
   background: #006699;
   color: #fff;
 }
-.container .history {
-  height: 20px;
-  line-height: 20px;
-  padding: 0 10px;
-  font-size: 12px;
-}
-.container .history .history-header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-.container .history .history-header span[class~=mui-icon] {
-  cursor: pointer;
-  font-size: 16px;
-  line-height: 20px;
-}
-.container .history .history-list {
-  border-bottom: 1px solid #ccc;
-}
-.container .history .history-list li {
-  display: flex;
-  justify-content: space-between;
+.container .orderbar {
   height: 30px;
   line-height: 30px;
-  padding: 0 5px;
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
-  border-top: 1px solid #ccc;
+  background: #efeff4;
+  font-size: 0;
+  box-shadow: 0 0px 2px #ccc;
 }
-.container .history .history-list li a {
-  flex: 1;
-  color: #333;
-  white-space: nowrap;
+.container .orderbar > span {
+  display: inline-block;
+  width: 25%;
+  font-size: 12px;
+  text-align: center;
+}
+.container .orderbar > span.selected {
+  color: #f30;
+}
+.container .orderbar > span span[class~=mui-icon-arrowdown],
+.container .orderbar > span span[class~=mui-icon-arrowup] {
+  margin-left: 2px;
+  font-size: 12px;
+}
+.container .search-list {
+  padding: 10px 10px 0;
+}
+.container .search-list .product-list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.container .search-list .product-list li {
+  width: 49%;
+  box-shadow: 0 0 5px rgba(34, 33, 33, 0.2);
+  padding: 10px 0;
+  margin: 5px 0;
+}
+.container .search-list .product-list li a {
+  display: block;
+  width: 100%;
+}
+.container .search-list .product-list li a img {
+  width: 100%;
+  display: block;
+}
+.container .search-list .product-list li .info {
+  padding: 0 5px;
+  text-align: center;
+}
+.container .search-list .product-list li .info .name {
   overflow: hidden;
   text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
-.container .history .history-list li .mui-icon {
-  font-weight: 900;
+.container .search-list .product-list li .info .price-now {
+  color: #f00;
 }
-.container .history .history-list li .mui-icon::before {
-  font-size: 16px;
-  line-height: 30px;
+.container .search-list .product-list li .info .price-old {
+  font-size: 12px;
+  color: #ccc;
+}
+.container .search-list .product-list li .info .button {
+  background: #006699;
+  color: #fff;
 }
 
 .footer-bar {
@@ -155,4 +177,4 @@ body {
   display: block;
 }
 
-/*# sourceMappingURL=search.css.map */
+/*# sourceMappingURL=searchresult.css.map */
