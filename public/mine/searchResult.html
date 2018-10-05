@@ -42,6 +42,8 @@
     </div>
   </div>
 
+  <div class="waiting hidden"><span class="mui-spinner"></span></div>
+
   <footer class="footer-bar">
     <ul>
       <li><a href="" class="mui-icon mui-icon-home"><span>首页</span></a></li>
@@ -54,47 +56,43 @@
   <!-- 模板文件 -->
   <!-- 搜索列表模板 -->
   <script type="text/template" id="search-result">
-    <% if (data.length !== 0) { %>
-      <% for (let i = 0; i < data.length; i++) {%>
-        <%
-          // 对数据进行预处理
-          let thisPro = data[i]
-          let showPic = ''
-  
-          if (thisPro.pic.length === 0) {
-            // 当没有图片数据的时候设置默认图片
-            let defaultPic = {
-              "id": i,
-              "picName": "defaultPic",
-              "productId": i,
-              "picAddr": "/mobile/images/none.jpg"
-            }
-            showPic = defaultPic.picAddr
-          } else {
-            // 有图片则使用第一张图片
-            showPic = thisPro.pic[0].picAddr
+    <% for (let i = 0; i < data.length; i++) {%>
+      <%
+        // 对数据进行预处理
+        let thisPro = data[i]
+        let showPic = ''
+
+        if (thisPro.pic.length === 0) {
+          // 当没有图片数据的时候设置默认图片
+          let defaultPic = {
+            "id": i,
+            "picName": "defaultPic",
+            "productId": i,
+            "picAddr": "/mobile/images/none.jpg"
           }
-        %>
-          <li>
-            <a href=""><img src="<%= showPic %>" alt=""></a>
-            <div class="info">
-              <p class="name"><%= thisPro.proName %></p>
-              <p class="price">
-                <span class="price-now">¥<%= thisPro.price %></span>
-                <del class="price-old">¥<%= thisPro.oldPrice %></del>
-              </p>
-              <button class="button">立即购买</button>
-            </div>
-          </li>
-        <% } %>
-    <% } else { %>
-      <span>没有找到您想要的商品~</span>
-    <% } %>
+          showPic = defaultPic.picAddr
+        } else {
+          // 有图片则使用第一张图片
+          showPic = thisPro.pic[0].picAddr
+        }
+      %>
+        <li>
+          <a href=""><img src="<%= showPic %>" alt=""></a>
+          <div class="info">
+            <p class="name"><%= thisPro.proName %></p>
+            <p class="price">
+              <span class="price-now">¥<%= thisPro.price %></span>
+              <del class="price-old">¥<%= thisPro.oldPrice %></del>
+            </p>
+            <button class="button">立即购买</button>
+          </div>
+        </li>
+      <% } %>
     </script>
   <!-- 引入脚本文件 -->
   <script src="lib/zepto/zepto.min.js"></script>
   <script src="lib/mui/js/mui.min.js"></script>
-  <script src="lib/art-template/template-web.js"></script>Z
+  <script src="lib/art-template/template-web.js"></script>
   <script src="js/searchResult.js"></script>
 </body>
 

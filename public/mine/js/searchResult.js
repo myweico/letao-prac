@@ -4,22 +4,23 @@ $(function () {
     page: 0,
     proName: ''
   }
+
   // 为了判断是否还有数据，page固定
   var pageSize = 4
-  
+
   // 初始化页面
   initPage()
 
-  // 初始化区域滚动
-  mui('.mui-scroll-wrapper').scroll({
-    scrollY: true, //是否竖向滚动
-    scrollX: false, //是否横向滚动
-    startX: 0, //初始化时滚动至x
-    startY: 0, //初始化时滚动至y
-    indicators: false, //是否显示滚动条
-    deceleration: 0.001, //阻尼系数,系数越小滑动越灵敏
-    bounce: true //是否启用回弹
-  })
+  /*   // 初始化区域滚动
+    mui('.mui-scroll-wrapper').scroll({
+      scrollY: true, //是否竖向滚动
+      scrollX: false, //是否横向滚动
+      startX: 0, //初始化时滚动至x
+      startY: 0, //初始化时滚动至y
+      indicators: false, //是否显示滚动条
+      deceleration: 0.001, //阻尼系数,系数越小滑动越灵敏
+      bounce: true //是否启用回弹
+    }) */
 
   // 初始化下拉刷新
   mui.init({
@@ -39,8 +40,7 @@ $(function () {
           getSearch(options, (data) => {
             setTimeout(() => {
               mui('#refreshContainer').pullRefresh().endPulldownToRefresh()
-              mui('#refreshContainer').pullRefresh().refresh(true)
-              renderList(data)
+              initSearch(data)
             }, 1000)
             // mui('#refreshContainer').pullRefresh().endPullDown() //官网的方法不存在？？
           })
@@ -55,10 +55,9 @@ $(function () {
           options.page = parseInt(options.page) + 1
           getSearch(options, (data) => {
             setTimeout(() => {
-              let hasNoMore = options.page * pageSize > parseInt(data.count)
+              let hasNoMore = options.page * pageSize >= parseInt(data.count)
               if (hasNoMore) {
-                // 回退有数据的页面
-                options.page = options.page - 1
+                // 回退到原页面
                 mui('#refreshContainer').pullRefresh().endPullupToRefresh(true)
               } else {
                 mui('#refreshContainer').pullRefresh().endPullupToRefresh()
@@ -89,7 +88,19 @@ $(function () {
       return
     }
 
-    getSearch(options, renderList)
+    $('.waiting').removeClass('hidden')
+    getSearch(options, (data) => {
+      setTimeout(function () {
+        $('.waiting').addClass('hidden')
+        initSearch(data)
+      }, 500)
+    })
+  })
+
+  $('.search-input input').on('keyup', function (event) {
+    if (event.keyCode === 13) {
+      $('.search-input button').trigger('tap')
+    }
   })
 
   // 绑定排序事件
@@ -112,17 +123,28 @@ $(function () {
     }
     // 重新获取列表
     options.page = 1
-    mui('#refreshContainer').pullRefresh().refresh(true)
-    getSearch(options, renderList)
+    $('.waiting').removeClass('hidden')
+    getSearch(options, (data) => {
+      setTimeout(function () {
+        $('.waiting').addClass('hidden')
+        initSearch(data)
+      }, 500)
+    })
   })
 
-  function initPage () {
+  function initPage() {
     let url = location.href
     let reg = /keyword=([^&]*)/
     let keyword = reg.exec(url)[1]
     options.proName = keyword
     options.page = 1
-    getSearch(options, renderList)
+    $('.waiting').removeClass('hidden')
+    getSearch(options, (data) => {
+      setTimeout(function () {
+        $('.waiting').addClass('hidden')
+        initSearch(data)
+      }, 500)
+    })
   }
 
   function getSearch(optoins, callback) {
@@ -145,5 +167,18 @@ $(function () {
   function renderList(data) {
     let str = template('search-result', data)
     $('.product-list').html(str)
+  }
+
+  function initSearch(data) {
+    if (data.data.length === 0) {
+      $('.search-list').html('<div class="noData">没有找到您要的商品</div>')
+      mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+      return
+    } else {
+      $('.search-list').html('<ul class="product-list"></ul>')
+      let renderStr = template('search-result', data)
+      $('.product-list').append(renderStr)
+      mui('#refreshContainer').pullRefresh().enablePullupToRefresh()
+    }
   }
 })
