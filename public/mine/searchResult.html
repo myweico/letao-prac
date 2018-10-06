@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ch-ZH">
+<html lang="zh">
 
 <head>
   <meta charset="UTF-8">
@@ -84,7 +84,7 @@
               <span class="price-now">¥<%= thisPro.price %></span>
               <del class="price-old">¥<%= thisPro.oldPrice %></del>
             </p>
-            <button class="button">立即购买</button>
+            <button class="button-buy" data-id="<%= thisPro.id %>">立即购买</button>
           </div>
         </li>
       <% } %>

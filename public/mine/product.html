@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="blue">
+  <link type="image/x-icon" rel="shortcut icon" href="images/favicon.ico">
+  <link rel="stylesheet" href="lib/mui/css/mui.min.css">
+  <link rel="stylesheet" href="lib/mui/css/icons-extra.css">
+  <link rel="stylesheet" href="styles/product.css">
+  <title>乐淘-商品详情</title>
+</head>
+
+<body>
+  <header id="header" class="mui-bar mui-bar-nav">
+    <a class="mui-icon mui-icon-back" href="javascript:history.back();"></a>
+    <h1 class="mui-title">商品详情</h1>
+    <a class="mui-icon mui-icon-home mui-pull-right" href="/mine/"></a>
+  </header>
+
+  <div class="container"></div>
+
+  <footer class="footer-bar">
+    <div class="footer-cart">
+      <p class="mui-icon-extra mui-icon-extra-cart"></p>
+      <p>购物车</p>
+    </div>
+    <div class="footer-button">
+      <a href="javascript: void(0)">加入购物车</a>
+      <a href="javascript: void(0)">立即购买</a>
+    </div>
+  </footer>
+
+  <!-- 商品详情的模板 -->
+  <script type="text/template" id="detail-template"">
+    <!-- 轮播图 -->
+    <div class="mui-slider">
+      <div class="mui-slider-group">
+        <% for(let i = 0; i < pic.length; i++) { %>
+          <div class="mui-slider-item">
+            <a href="javascript: void(0)">
+              <img src="<%= pic[i].picAddr %>" alt="<%= pic[i].picName %>" />
+            </a>
+          </div>
+        <% } %>
+      </div>
+      <div class="mui-slider-indicator">
+        <% for(let i = 0; i < pic.length; i++) { %>
+          <% if (i === 0) { %>
+            <div class="mui-indicator mui-active"></div>
+          <% } else { %>
+          <div class="mui-indicator"></div>
+          <% } %>
+        <% } %>
+      </div>
+    </div>
+    <!-- 标题 -->
+    <h4 class="product-title"><%= proName %></h4>
+    <!-- 价格 -->
+    <div class="product-price">
+      &yen;<em><%= price %></em>   <del><%= oldPrice %><del>
+    </div>
+    <!-- 规格 -->
+    <div class="product-list selected-list">
+      <span class="list-title">已选</span>
+      <span class="mui-icon mui-icon-more list-ellipsis"></span>
+      <span class="list-info"><%= size.split('-')[0] %>, 1件</span>
+    </div>
+
+<div id="selected-popover"" class=" mui-popover mui-popover-bottom mui-popover-action">
+  <!-- 可选择菜单 -->
+  <ul class=" mui-table-view selected-view">
+    <li class="mui-table-view-cell selected-cell mui-scroll-wrapper">
+      <!-- 区域滚动 -->
+      <div class="mui-scroll">
+        <div class="product-kind">尺码</div>
+        <div class="product-choice">
+          <%
+            // 对数据进行预处理
+            let sizeRange = size.split('-')
+            let start = 1*sizeRange[0]
+            let end = 1*sizeRange[1]
+          %>
+         
+          <% for (let num = start; num <= end; num++) { %>
+            <% if (num === start) { %>
+              <span class="chosen"><%= num %></span>
+            <% } else { %>
+              <span><%= num %></span>
+            <% } %>
+          <% } %>
+        </div>
+        <div class="product-count">
+          <span>数量</span>
+          <div class="mui-numbox count-numbox" data-numbox-min="1" data-numbox-max="9">
+            <button class="mui-btn mui-btn-numbox-minus" type="button" disabled="">-</button>
+            <input class="mui-input-numbox" type="number" value="1">
+            <button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="selected-footer">
+        <a href="javascript: void(0)">加入购物车</a>
+        <a href="javascript: void(0)">立即购买</a>
+      </div>
+    </li>
+  </ul>
+</div>
+  </script>
+
+  <!-- 引入脚本文件 -->
+  <script src="lib/zepto/zepto.min.js"></script>
+  <script src="lib/mui/js/mui.min.js"></script>
+  <script src="lib/art-template/template-web.js"></script>
+  <script src="js/product.js"></script>
+</body>
+
+</html>

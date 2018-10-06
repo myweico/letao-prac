@@ -11,17 +11,6 @@ $(function () {
   // 初始化页面
   initPage()
 
-  /*   // 初始化区域滚动
-    mui('.mui-scroll-wrapper').scroll({
-      scrollY: true, //是否竖向滚动
-      scrollX: false, //是否横向滚动
-      startX: 0, //初始化时滚动至x
-      startY: 0, //初始化时滚动至y
-      indicators: false, //是否显示滚动条
-      deceleration: 0.001, //阻尼系数,系数越小滑动越灵敏
-      bounce: true //是否启用回弹
-    }) */
-
   // 初始化下拉刷新
   mui.init({
     pullRefresh: {
@@ -55,7 +44,8 @@ $(function () {
           options.page = parseInt(options.page) + 1
           getSearch(options, (data) => {
             setTimeout(() => {
-              let hasNoMore = options.page * pageSize >= parseInt(data.count)
+              let hasNoMore = data.data.length < pageSize
+              console.log(hasNoMore)
               if (hasNoMore) {
                 // 回退到原页面
                 mui('#refreshContainer').pullRefresh().endPullupToRefresh(true)
@@ -130,6 +120,12 @@ $(function () {
         initSearch(data)
       }, 500)
     })
+  })
+
+  // 绑定都买事件
+  $('.search-list').on('tap', '.button-buy', function () {
+    let prodId = this.dataset.id
+    location.href = '/mine/product.html?productId=' + prodId
   })
 
   function initPage() {
