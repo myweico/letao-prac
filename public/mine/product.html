@@ -29,8 +29,8 @@
       <p>购物车</p>
     </div>
     <div class="footer-button">
-      <a href="javascript: void(0)">加入购物车</a>
-      <a href="javascript: void(0)">立即购买</a>
+      <a href="javascript: void(0)" class="button-add2cart">加入购物车</a>
+      <a href="javascript: void(0)" class="button-buy">立即购买</a>
     </div>
   </footer>
 
@@ -67,7 +67,9 @@
     <div class="product-list selected-list">
       <span class="list-title">已选</span>
       <span class="mui-icon mui-icon-more list-ellipsis"></span>
-      <span class="list-info"><%= size.split('-')[0] %>, 1件</span>
+      <span class="list-info">
+        <span class="selected-size"><%= size.split('-')[0] %></span>, <span class="selected-num">1</span>件
+      </span>
     </div>
 
 <div id="selected-popover"" class=" mui-popover mui-popover-bottom mui-popover-action">
@@ -95,7 +97,7 @@
         </div>
         <div class="product-count">
           <span>数量</span>
-          <div class="mui-numbox count-numbox" data-numbox-min="1" data-numbox-max="9">
+          <div class="mui-numbox count-numbox" data-numbox-min="1" data-numbox-max="<%= num %>">
             <button class="mui-btn mui-btn-numbox-minus" type="button" disabled="">-</button>
             <input class="mui-input-numbox" type="number" value="1">
             <button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
@@ -104,8 +106,8 @@
       </div>
 
       <div class="selected-footer">
-        <a href="javascript: void(0)">加入购物车</a>
-        <a href="javascript: void(0)">立即购买</a>
+        <a href="javascript: void(0)" class="button-add2cart">加入购物车</a>
+        <a href="javascript: void(0)" class="button-buy">立即购买</a>
       </div>
     </li>
   </ul>

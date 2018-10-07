@@ -1,4 +1,5 @@
 $(function () {
+  /* 全局变量 */
   initPage()
 })
 
@@ -25,9 +26,39 @@ function initPage() {
       // 初始化按钮
       mui('.count-numbox').numbox()
 
-      // 选中样式的事件
+      // 选择商品
       $('.product-choice span').on('tap', function () {
+        let size = $(this).text()
+        console.log(size)
         $(this).addClass('chosen').siblings().removeClass('chosen')
+        $('.selected-size').text(size)
+      })
+
+      $('input.mui-input-numbox').on('change', function () {
+        let num  = $(this).val()
+        $('.selected-num').text(num)
+      })
+
+      $('.button-add2cart').on('tap', function() {
+        let id = getId()
+        let size = $('.selected-size').text()
+        let num = $('.selected-num').text()
+        $.ajax({
+          type: 'post',
+          url: '/cart/addCart',
+          data: {
+            productId: id,
+            size: size,
+            num: num
+          },
+          success: function (data) {
+            if (data.success) {
+              mui.toast('已添加至购物车')
+            } else {
+              location.href = "/mine/login.html?back=" + location.href
+            }
+          }
+        })
       })
     }
   })
