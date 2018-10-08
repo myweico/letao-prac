@@ -20,6 +20,96 @@
     <h1 class="mui-title">购物车</h1>
   </header>
 
+  <div class="container mui-scroll-wrapper">
+    <ul class="cart-list mui-scroll">
+    </ul>
+  </div>
+
+  <div class="cart-footer">
+    <div class="footer-left">
+      <div class="product-checkbox">
+        <input type="checkbox" value="shoe" id="shoe" />
+        <label for="shoe"></label>
+      </div>
+      <div class="cart-select">已选(1)</div>
+    </div>
+    <div class="footer-right">
+      <div class="cart-sum">合计: &yen;0.00</div>
+      <div class="button-deal">下单</div>
+    </div>
+  </div>
+
+  <script type="text/template" id="cart-body-template">
+    <% for(let i = 0; i < data.length; i++) { %>
+      <% let thisProd = data[i] %>
+      <li class="mui-table-view-cell mui-transitioning product-li" 
+        data-cart-index="<%= i %>">
+        <div class="mui-slider-right mui-disabled">
+          <a class="mui-btn mui-btn-blue mui-icon cart-edit" style="transform: translate(0px, 0px);">编辑</a>
+          <a class="mui-btn mui-btn-red mui-icon cart-delete" style="transform: translate(-90px, 0px);">删除</a>
+        </div>
+        <div class="mui-slider-handle" style="transform: translate(0px, 0px);">
+          <div class="mui-table-cell product-box">
+            <div class="product-checkbox">
+              <input type="checkbox" value="shoe" id="shoe" />
+              <label for="shoe"></label>
+            </div>
+            <div class="product-info">
+              <div class="info-img">
+                <img src="/mobile/images/product.jpg">
+              </div>
+              <div class="info-detail">
+                <h4><%= thisProd.proName  %></h4>
+                <p class="size">
+                  <span class="selected-size"><%= thisProd.size %></span>，
+                  <span class="selected-num"><%= thisProd.num %></span>件
+                </p>
+                <p class="price">&yen;<%= thisProd.price %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    <% } %>
+  </script>
+
+  <script type="text/template" id="product-edit-template">
+      <!-- 区域滚动 -->
+    <div class="mui-scroll-wrapper">
+      <div class="mui-scroll">
+        <div class="product-kind">尺码</div>
+        <div class="product-choice">
+          <%
+              // 对数据进行预处理
+              var sizeRange = productSize.split('-')
+              var start = 1*sizeRange[0]
+              var end = 1*sizeRange[1]
+              var size = 1*size
+          %>
+
+          <% for (let num = start; num <= end; num++) { %>
+          <% if (num === size) { %>
+          <span class="chosen">
+            <%= num %></span>
+          <% } else { %>
+          <span>
+            <%= num %></span>
+          <% } %>
+          <% } %>
+        </div>
+        <div class="product-count">
+          <span>数量</span>
+          <div class="mui-numbox count-numbox" data-numbox-min="1" data-numbox-max="<%= productNum %>">
+            <button class="mui-btn mui-btn-numbox-minus" type="button" disabled="">-</button>
+            <input class="mui-input-numbox" type="number" value="<%= num %>">
+            <button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>
+
+
   <footer class="footer-bar">
     <ul>
       <li><a href="/mine/" class="mui-icon mui-icon-home"><span>首页</span></a></li>

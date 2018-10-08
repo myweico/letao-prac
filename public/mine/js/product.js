@@ -29,7 +29,6 @@ function initPage() {
       // 选择商品
       $('.product-choice span').on('tap', function () {
         let size = $(this).text()
-        console.log(size)
         $(this).addClass('chosen').siblings().removeClass('chosen')
         $('.selected-size').text(size)
       })
@@ -59,6 +58,10 @@ function initPage() {
             }
           }
         })
+      })
+
+      $('.footer-cart').on('tap', function () {
+        location.href = '/mine/cart.html'
       })
     }
   })
