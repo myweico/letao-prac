@@ -1,0 +1,76 @@
+ul, li, a, img {
+  padding: 0;
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+.clearfix::after,
+.clearfix::before {
+  content: "";
+  display: block;
+  font-size: 0;
+  height: 0;
+  width: 0;
+  opacity: 0;
+  clear: both;
+}
+
+body {
+  background: #fff;
+}
+
+.mui-bar.mui-bar-nav {
+  background: #006699;
+  height: 45px;
+}
+.mui-bar.mui-bar-nav .mui-title {
+  color: #fff;
+}
+.mui-bar.mui-bar-nav .mui-icon {
+  color: #fff;
+}
+
+.footer-bar {
+  height: 50px;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  background: #006699;
+  z-index: 999;
+}
+.footer-bar ul {
+  list-style: none;
+}
+.footer-bar ul::before {
+  content: "";
+  display: block;
+}
+.footer-bar ul li {
+  float: left;
+  width: 25%;
+}
+.footer-bar ul li a {
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  color: #fff;
+  text-align: center;
+  padding-top: 5px;
+}
+.footer-bar ul li a.active {
+  color: #ff8c00;
+}
+.footer-bar ul li a:before {
+  font-size: 20px;
+}
+.footer-bar ul li a span {
+  padding-top: 5px;
+  font-size: 12px;
+  display: block;
+}
+
+/*# sourceMappingURL=profile.css.map */

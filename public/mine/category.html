@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="blue">
+  <link type="image/x-icon" rel="shortcut icon" href="images/favicon.ico">
+  <link rel="stylesheet" href="lib/mui/css/mui.min.css">
+  <link rel="stylesheet" href="lib/mui/css/icons-extra.css">
+  <link rel="stylesheet" href="styles/category.css">
+  <title>乐淘-分类列表</title>
+</head>
+
+<body>
+  <header id="header" class="mui-bar mui-bar-nav">
+    <a class="mui-icon mui-icon-back" href="javascript:history.back();"></a>
+    <h1 class="mui-title">分类列表</h1>
+  </header>
+
+  <div class="container">
+    <div class="category-tab mui-scroll-wrapper">
+      <ul class="mui-scroll">
+      </ul>
+    </div>
+    <div class="category-list">
+      <div class="mui-scroll-wrapper">
+        <ul class="mui-scroll">
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer-bar">
+    <ul>
+      <li><a href="/mine/" class="mui-icon mui-icon-home"><span>首页</span></a></li>
+      <li><a href="/mine/category.html" class="mui-icon mui-icon-bars"><span>分类</span></a></li>
+      <li><a href="/mine/cart.html" class="mui-icon-extra mui-icon-extra-cart"><span>购物车</span></a></li>
+      <li><a href="/mine/profile.html" class="mui-icon mui-icon-person"><span>会员中心</span></a></li>
+    </ul>
+  </footer>
+
+  <!-- 列表模板 -->
+  <script type="text/template" id="category-tab-tmpl">
+    <% for (let i = 0; i < rows.length; i++) { %>
+      <% if (i === 0) { %>
+        <li data-id="<%= rows[i].id %>" class="selected"><%= rows[i].categoryName %></li>
+      <% } else { %>
+        <li data-id="<%= rows[i].id %>"><%= rows[i].categoryName %></li>
+      <% } %>
+    <% } %>
+  </script>
+
+  <script type="text/template" id="category-list-tmpl">
+    <% if (rows.length === 0) { %>
+      <li class="noLiData">暂时没有该分类</li>
+    <% } else { %>
+      <% for (let i = 0; i < rows.length; i++) { %>
+        <% var thisCate = rows[i] %>
+        <li>
+          <a href="/mine/product.html?productId=1">
+            <img src="<%= thisCate.brandLogo %>" alt="">
+            <p><%= thisCate.brandName %></p>
+          </a>
+        </li>
+      <% } %>
+    <% } %>
+  </script>
+
+
+  <!-- 引入脚本文件 -->
+  <script src="lib/zepto/zepto.min.js"></script>
+  <script src="lib/mui/js/mui.min.js"></script>
+  <script src="lib/art-template/template-web.js"></script>
+  <script src="js/category.js"></script>
+</body>
+
+</html>

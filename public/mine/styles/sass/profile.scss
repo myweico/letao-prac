@@ -1,0 +1,69 @@
+@import '_reset';
+@import '_variables';
+@import '_mixin';
+@import '_common';
+
+body {
+  background: #fff;
+}
+
+.mui-bar.mui-bar-nav {
+  background: $themeColor;
+  height: 45px;
+
+  .mui-title {
+    color: #fff;
+  }
+
+  .mui-icon {
+    color: #fff;
+  }
+}
+
+
+.footer-bar {
+  height: 50px;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  background: $themeColor;
+  z-index: 999;
+
+  ul {
+    list-style: none;
+
+    &::before {
+      content: "";
+      display: block;
+    }
+
+    li {
+      float: left;
+      width: 25%;
+
+      a {
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        color: #fff;
+        text-align: center;
+        padding-top: 5px;
+
+        &.active {
+          color: #ff8c00;
+        }
+
+        &:before {
+          font-size: 20px;
+        }
+
+        span {
+          padding-top: 5px;
+          font-size: 12px;
+          display: block;
+        }
+      }
+    }
+  }
+}
