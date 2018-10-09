@@ -8,7 +8,15 @@ $(function () {
   // 初始化区域滚动
   mui('.mui-scroll-wrapper').scroll({
     deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
-  });
+  })
+
+  // 跳转功能
+  $('body').on('tap', '.product-info', function () {
+    let thisLi = $(this).parents('.product-li')
+    let index = thisLi.data('cartIndex')
+    let prodId = window.cartData[index].productId
+    location.href = '/mine/product.html?productId=' + prodId
+  })
 
   // 删除功能
   $('body').on('tap', '.cart-delete', function () {
@@ -26,6 +34,8 @@ $(function () {
           },
           success: function () {
             deleteLi.remove()
+            // 重新计算价格
+            $('.product-li .product-checkbox input').trigger('input')
             mui.toast('删除成功!', {
               duration: 1000
             })
@@ -64,6 +74,9 @@ $(function () {
               // 修改购物车的数据（或者可以重新请求渲染购物车页面）
               $(editLi).find('.selected-size').text(window.updateData.size)
               $(editLi).find('.selected-num').text(window.updateData.num)
+              // 修改获取到的数据（重新获取比较保险，而为简单则直接修改）
+              editLiData.num = window.updateData.num
+              editLiData.size = window.updateData.size
               setTimeout(function () {
                 mui.swipeoutClose(editLi)
               }, 0)
@@ -93,12 +106,14 @@ $(function () {
       deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
     });
   })
+
   // 编辑尺码
   $('body').on('tap', '.product-choice span', function () {
     let size = parseInt($(this).text())
     $(this).addClass('chosen').siblings().removeClass('chosen')
     window.updateData.size = size
   })
+
   // 编辑数量
   $('body').on('change', 'input.mui-input-numbox', function () {
     let num = parseInt($(this).val())
@@ -106,7 +121,44 @@ $(function () {
   })
 
   // 合计价格
+  $('body').on('input', '.product-li .product-checkbox input', function () {
+    let allAmount = $('.product-li .product-checkbox input').length
+    let btnChooseAll = $('.footer-left .product-checkbox input')
+    let [account, amount] = getCount()
+    // 改变下单按钮颜色
+    if (account !== 0) {
+      $('.footer-right .button-deal').addClass('hasProduct')
+    } else {
+      $('.footer-right .button-deal').removeClass('hasProduct')
+    }
+    // 改变合计价格
+    $('.footer-right span.price').text(account.toFixed(2))
 
+    // 改变已选数量
+    $('.cart-select span').text(amount)
+
+    // 判断是否全选
+    if (allAmount === amount) {
+      btnChooseAll.prop('checked', true)
+    } else {
+      btnChooseAll.prop('checked', false)
+    }
+  })
+
+  // 全选
+  $('body').on('input', '.footer-left input', function () {
+    let isChecked = $(this).prop('checked')
+    console.log(isChecked)
+    let all = $('.product-li .product-checkbox input')
+    if (isChecked) {
+      all.prop('checked', true)
+    } else {
+      all.prop('checked', false)
+    }
+    $('.product-li .product-checkbox input').trigger('input')
+  })
+
+  /* ---- 封装函数 ----- */
   function initCart() {
     $.ajax({
       url: '/cart/queryCart',
@@ -139,5 +191,18 @@ $(function () {
       error: options.error || function () {},
       complete: options.complete || function () {}
     })
+  }
+
+  function getCount() {
+    let liCheckedSet = $('.product-li .product-checkbox input:checked').parents('.product-li')
+    let amount = liCheckedSet.length
+    let account = 0
+    liCheckedSet.each(function (i) {
+      let index = this.dataset.cartIndex
+      let num = window.cartData[index].num
+      let price = window.cartData[index].price
+      account = account + num * price
+    })
+    return [account, amount]
   }
 })

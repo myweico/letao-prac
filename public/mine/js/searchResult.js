@@ -122,7 +122,7 @@ $(function () {
     })
   })
 
-  // 绑定都买事件
+  // 绑定购买事件
   $('.search-list').on('tap', '.button-buy', function () {
     let prodId = this.dataset.id
     location.href = '/mine/product.html?productId=' + prodId
