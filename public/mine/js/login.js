@@ -25,6 +25,7 @@ $(function () {
   })
 
   function getReturnUrl () {
-    return /back=([^&]*)/.exec(location.href)[1]
+    let returnURl = /back=([^&]*)/.exec(location.href)
+    return returnURl ? returnURl[1] : '/mine/'
   }
 })
