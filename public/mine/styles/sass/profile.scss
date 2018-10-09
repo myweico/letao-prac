@@ -20,6 +20,39 @@ body {
   }
 }
 
+.container {
+  padding: 45px 0 50px;
+  
+  a.info {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    img {
+      max-width: 42px;
+      max-height: 42px;
+      line-height: 42px;
+    }
+
+    .info-right {
+      margin-left: 10px;
+      
+      p {
+        color: #333;
+      }
+    }
+  }
+
+  button.mui-btn-block {
+    width: 95%;
+    margin: 20px auto;
+    font-size: 14px;
+    padding: 10px;
+    background: #f4f4f4;
+    border: none;
+  }
+}
+
 
 .footer-bar {
   height: 50px;

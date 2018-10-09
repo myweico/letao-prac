@@ -33,6 +33,34 @@ body {
   color: #fff;
 }
 
+.container {
+  padding: 45px 0 50px;
+}
+.container a.info {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.container a.info img {
+  max-width: 42px;
+  max-height: 42px;
+  line-height: 42px;
+}
+.container a.info .info-right {
+  margin-left: 10px;
+}
+.container a.info .info-right p {
+  color: #333;
+}
+.container button.mui-btn-block {
+  width: 95%;
+  margin: 20px auto;
+  font-size: 14px;
+  padding: 10px;
+  background: #f4f4f4;
+  border: none;
+}
+
 .footer-bar {
   height: 50px;
   width: 100%;
