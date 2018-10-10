@@ -1,0 +1,49 @@
+@import '_reset';
+@import '_variables';
+@import '_mixin';
+@import '_common';
+
+body {
+  background: #fff;
+}
+
+.mui-bar.mui-bar-nav {
+  background: $themeColor;
+  height: 45px;
+
+  .mui-title {
+    color: #fff;
+  }
+
+  .mui-icon {
+    color: #fff;
+  }
+}
+
+.container {
+  padding: 45px 10px 0;
+
+  .security {
+    margin-top: 20px;
+
+    input[type=submit] {
+      width: 100%;
+      height: 40px;
+    }
+  }
+}
+
+
+.code {
+  input {
+    width: 68%;
+  }
+
+  button.mui-btn.mui-btn-primary {
+    width: 30%;
+    padding-left: 0;
+    padding-right: 0;
+    height: 40px;
+    text-align: center
+  }
+}

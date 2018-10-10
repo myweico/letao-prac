@@ -1,11 +1,12 @@
 $(function () {
+  // 验证码
   $('.code button').on('tap', function () {
     let codeBtn = this
     codeBtn.innerHTML = '正在发送...'
     codeBtn.setAttribute('disabled', true)
     // 请求验证码
-    $.ajax({
-      url: '/user/vCode',
+    ajaxNeedLogin({
+      url: '/user/vCodeForUpdatePassword',
       success: function (data) {
         console.log(data.vCode)
       }

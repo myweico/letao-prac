@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="blue">
+  <link type="image/x-icon" rel="shortcut icon" href="images/favicon.ico">
+  <link rel="stylesheet" href="lib/mui/css/mui.min.css">
+  <link rel="stylesheet" href="lib/mui/css/icons-extra.css">
+  <link rel="stylesheet" href="styles/security.css">
+  <title>乐淘商城</title>
+</head>
+
+<body>
+  <header id="header" class="mui-bar mui-bar-nav">
+    <a class="mui-icon mui-icon-back" href="javascript:history.back();"></a>
+    <h1 class="mui-title">乐淘安全中心</h1>
+  </header>
+
+  <div class="container">
+    <div class="security">
+      <div class="mui-input-row">
+        <input type="password" class="mui-input-password password" placeholder="原密码">
+      </div>
+      <div class="mui-input-row">
+        <input type="password" class="mui-input-password password" placeholder="新密码">
+      </div>
+      <div class="mui-input-row">
+        <input type="password" class="mui-input-password password" placeholder="再次输入新密码">
+      </div>
+      <div class="mui-input-row code">
+        <input type="text">
+        <button 
+          type="button" 
+          class="mui-btn mui-btn-primary"
+        >
+          获取验证码
+        </button>
+      </div>
+      <input type="submit" value="修改密码">
+    </div>
+  </div>
+
+
+  <!-- 引入脚本文件 -->
+  <script src="lib/zepto/zepto.min.js"></script>
+  <script src="lib/mui/js/mui.min.js"></script>
+  <script src="lib/art-template/template-web.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/security.js"></script>
+</body>
+
+</html>
