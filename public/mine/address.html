@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="blue">
+  <link type="image/x-icon" rel="shortcut icon" href="images/favicon.ico">
+  <link rel="stylesheet" href="lib/mui/css/mui.min.css">
+  <link rel="stylesheet" href="lib/mui/css/icons-extra.css">
+  <link rel="stylesheet" href="lib/mui/css/mui.poppicker.css">
+  <link rel="stylesheet" href="lib/mui/css/mui.picker.css">
+  <link rel="stylesheet" href="styles/address.css">
+  <title>乐淘-地址管理</title>
+</head>
+
+<body>
+  <header id="header" class="mui-bar mui-bar-nav">
+    <a class="mui-icon mui-icon-back" href="javascript:history.back();"></a>
+    <h1 class="mui-title">地址管理</h1>
+  </header>
+
+  <div class="container mui-scroll-wrapper"></div>
+
+  <script type="text/template" id="address-template">
+    <% if (address.length === 0) { %>
+      <div class="noData">您还没有添加过收货地址</div>
+    <% } else { %>
+      <ul class="mui-table-view mui-scroll">
+        <% for (let i = 0; i < address.length; i++) { %>
+          <% var thisItem = address[i] %>
+          <li class="mui-table-view-cell mui-transitioning addressLi" data-id="<%= thisItem.id %>">
+            <div class="mui-slider-right mui-disabled">
+              <a class="mui-btn mui-btn-red deleteAddress" style="transform: translate(0px, 0px);">删除</a>
+            </div>
+            <div class="mui-slider-handle  mui-navigate-right info" style="transform: translate(0px, 0px);">
+              <div class="info-top">
+                <span class="info-name"><%= thisItem.recipients %></span>
+                <span class="info-phone"><%= thisItem.postCode %></span>
+              </div>
+              <div class="info-address">
+                <span><%= thisItem.address + thisItem.addressDetail %></span>
+              </div>
+            </div>
+          </li>
+        <% } %>
+      </ul>
+      <% } %>
+    <div class="btn-add">
+      + 添加收货地址
+    </div>
+  </script>
+
+  <script type="text/template" id="add-template">
+    <ul class="mui-table-view add-list">
+      <li><input type="text" class="address" placeholder="省份、城市、区县" value="<%= address %>"></li>
+      <li><input type="text" class="addressDetail" placeholder="详细地址，如街道、楼盘号等" value="<%= addressDetail %>"></li>
+      <li><input type="text" class="recipients" placeholder="姓名" value="<%= recipients %>"></li>
+      <li><input type="tel" class="mobile" placeholder="手机号码" value="<%= postCode %>"></li>
+    </ul>
+    <div class="address-footer">
+      <div class="cancel">取消</div>
+      <div class="save" data-edit-id="<%= editId %>">保存</div>
+    </div>
+  </script>
+
+  <!-- 引入脚本文件 -->
+  <script src="lib/zepto/zepto.min.js"></script>
+  <script src="lib/mui/js/mui.min.js"></script>
+  <script src="lib/mui/js/mui.picker.js"></script>
+  <script src="lib/mui/js/mui.poppicker.js"></script>
+  <script src="lib/art-template/template-web.js"></script>
+  <script src="js/cities.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/address.js"></script>
+</body>
+
+</html>
