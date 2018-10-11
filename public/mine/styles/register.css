@@ -36,17 +36,19 @@ body {
 .container {
   padding: 45px 10px 0;
 }
-.container .register {
+.container .login {
   margin-top: 20px;
 }
-.container .register input[type=submit] {
+.container .login input[type=submit] {
   width: 100%;
   height: 40px;
 }
-.container .register .login {
-  float: right;
+.container .login .register {
+  width: 100%;
+  height: 40px;
   line-height: 40px;
   font-size: 14px;
+  text-align: right;
   color: #007aff;
 }
 

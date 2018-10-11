@@ -41,36 +41,40 @@
   </div>
 
   <script type="text/template" id="cart-body-template">
-    <% for(let i = 0; i < data.length; i++) { %>
-      <% let thisProd = data[i] %>
-      <li class="mui-table-view-cell mui-transitioning product-li" 
-        data-cart-index="<%= i %>">
-        <div class="mui-slider-right mui-disabled">
-          <a class="mui-btn mui-btn-blue mui-icon cart-edit" style="transform: translate(0px, 0px);">编辑</a>
-          <a class="mui-btn mui-btn-red mui-icon cart-delete" style="transform: translate(-90px, 0px);">删除</a>
-        </div>
-        <div class="mui-slider-handle" style="transform: translate(0px, 0px);">
-          <div class="mui-table-cell product-box">
-            <div class="product-checkbox">
-              <input type="checkbox" value="shoe"/>
-              <label></label>
-            </div>
-            <div class="product-info">
-              <div class="info-img">
-                <img src="/mobile/images/product.jpg">
+    <% if (data.length === 0) { %>
+      <li class='noProduct'>购物车还没有商品</li>
+    <% } else { %>
+      <% for(let i = 0; i < data.length; i++) { %>
+        <% let thisProd = data[i] %>
+        <li class="mui-table-view-cell mui-transitioning product-li" 
+          data-cart-index="<%= i %>">
+          <div class="mui-slider-right mui-disabled">
+            <a class="mui-btn mui-btn-blue mui-icon cart-edit" style="transform: translate(0px, 0px);">编辑</a>
+            <a class="mui-btn mui-btn-red mui-icon cart-delete" style="transform: translate(-90px, 0px);">删除</a>
+          </div>
+          <div class="mui-slider-handle" style="transform: translate(0px, 0px);">
+            <div class="mui-table-cell product-box">
+              <div class="product-checkbox">
+                <input type="checkbox" value="shoe"/>
+                <label></label>
               </div>
-              <div class="info-detail">
-                <h4><%= thisProd.proName  %></h4>
-                <p class="size">
-                  <span class="selected-size"><%= thisProd.size %></span>，
-                  <span class="selected-num"><%= thisProd.num %></span>件
-                </p>
-                <p class="price">&yen;<%= thisProd.price %></p>
+              <div class="product-info">
+                <div class="info-img">
+                  <img src="/mobile/images/product.jpg">
+                </div>
+                <div class="info-detail">
+                  <h4><%= thisProd.proName  %></h4>
+                  <p class="size">
+                    <span class="selected-size"><%= thisProd.size %></span>，
+                    <span class="selected-num"><%= thisProd.num %></span>件
+                  </p>
+                  <p class="price">&yen;<%= thisProd.price %></p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </li>
+        </li>
+      <% } %>
     <% } %>
   </script>
 
