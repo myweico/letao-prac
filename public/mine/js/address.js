@@ -10,8 +10,6 @@ $(function () {
     ajaxNeedLogin({
       url: '/address/queryAddress',
       success: function (data) {
-        let defaultText = []
-        let defaultIndex = []
         editData = data.find(function (li) {
           return parseInt(li.id) === parseInt(editId)
         })
@@ -23,23 +21,6 @@ $(function () {
           postCode: editData.postCode
         })
         $('.container').html(editStr)
-        
-        // 获取设置选择器的默认值
-        defaultText = editData.address.split(' ')
-        console.log(defaultText)
-        defaultIndex[0] = cities.findIndex(function (province) {
-          return province.text === defaultText[0]
-        })
-        defaultIndex[1] = cities[defaultIndex[0]].children.findIndex(function (city) {
-          return city.text === defaultText[1]
-        })
-        defaultIndex[2] = cities[defaultIndex[0]].children[defaultIndex[1]].children.findIndex(function (district) {
-          return district.text === defaultText[2]
-        })
-        for (let i = 0; i < 3; i++) {
-          picker.pickers[i].setSelectedIndex(defaultIndex[i])
-          console.log(defaultIndex[i])
-        }
       }
     })
   })
@@ -90,8 +71,11 @@ $(function () {
     initAddress()
   })
 
-  // 选择器确定
+  // 点击编辑省市区
   $('body').on('tap', '.address', function () {
+    // 获取当前的省市区
+    let address = $(this).val() || '北京市 警备师 哈哈哈'
+    setSelectedIndex(address, picker, cities)
     picker.show()
   })
 
@@ -149,7 +133,6 @@ $(function () {
     })
 
     picker.setData(cities)
-
     return picker
   }
 
@@ -191,5 +174,43 @@ $(function () {
   // 检查手机号码
   function checkPhone(phone) {
     return /^1[34578]\d{9}$/.test(phone)
+  }
+
+  function setSelectedIndex(address, picker, cities = {}) {
+    let defaultText = address.split(' ')
+    let defaultIndex = []
+    console.log(defaultText)
+    let parentData = cities
+    for (let i = 0; i < 3; i++) {
+      defaultIndex[i] = parentData.findIndex(function (item) {
+        return item.text === defaultText[i]
+      })
+      console.log(defaultIndex[i])
+      if (defaultIndex[i] < 0) {
+        // 没有找到匹配值，默认值为第一个
+        defaultIndex[i] = 0
+        parentData = []
+      } else {
+        // 若找到匹配值，更新父数据
+        parentData = parentData[defaultIndex[i]].children || []
+      }
+      
+    }
+    console.log(defaultIndex)
+    // defaultIndex[0] = cities.findIndex(function (province) {
+    //   return province.text === defaultText[0]
+    // })
+    // defaultIndex[1] = cities[defaultIndex[0]].children.findIndex(function (city) {
+    //   return city.text === defaultText[1]
+    // })
+    // defaultIndex[2] = cities[defaultIndex[0]].children[defaultIndex[1]].children.findIndex(function (district) {
+    //   return district.text === defaultText[2]
+    // })
+
+    picker.pickers[0].setSelectedIndex(defaultIndex[0], 0, function () {
+      picker.pickers[1].setSelectedIndex(defaultIndex[1], 0, function () {
+        picker.pickers[2].setSelectedIndex(defaultIndex[2], 0)
+      })
+    })
   }
 })
