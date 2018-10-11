@@ -63,6 +63,10 @@ function initPage() {
       $('.footer-cart').on('tap', function () {
         location.href = '/mine/cart.html'
       })
+
+      $('.button-buy').on('tap', function () {
+        mui.toast('未提供接口')
+      })
     }
   })
 }

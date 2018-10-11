@@ -11,6 +11,7 @@ var category = require('./routes/category');
 var cart = require('./routes/cart');
 var address = require('./routes/address');
 var employee = require('./routes/employee');
+var redirect = require('./routes/redirect');
 
 var app = express();
 
@@ -41,9 +42,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 /*app.all('*',function(req,res,next){
- res.header('Access-Control-Allow-Origin','*');
- next();
- });*/
+    res.header('Access-Control-Allow-Origin','*');
+    next();
+});*/
 
 app.use('/user', user);
 app.use('/product', product);
@@ -51,6 +52,7 @@ app.use('/category', category);
 app.use('/cart', cart);
 app.use('/address', address);
 app.use('/employee', employee);
+app.use('/', redirect);
 
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
